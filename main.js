@@ -6,9 +6,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const iconoCarritoSpan = document.querySelector('.carrito-icono span');
     const body = document.querySelector('body');
     const cerrarCarrito = document.querySelector('.cerrar-carrito');
+    const comprarCarrito = document.querySelector('.comprar-carrito');
     const btnVaciarCarrito = document.querySelector('.vaciarCarrito');
     let carrito = [];
 
+
+    comprarCarrito.addEventListener('click', () => {
+        Swal.fire({
+            title: '¿Está seguro de finalizar la compra?',
+            text: 'Esto vaciará el carrito y eliminará su compra actual.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Finalizar compra',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                carrito = [];
+                listaCarritoHTML.innerHTML = '';
+                localStorage.removeItem('carrito');
+                iconoCarritoSpan.innerText = '0';
+                actualizarTotalCarrito();
+                Swal.fire(
+                    '¡Gracias por su compra!',
+                    'Esperamos verlo de nuevo pronto.',
+                    'success'
+                );
+            }
+        });
+    });
 
     iconoCarrito.addEventListener('click', () => {
         body.classList.toggle('mostrarCarrito');
