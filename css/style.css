@@ -1,5 +1,11 @@
-body{
+*{
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: calc(100vh - (97px + 37px));
     font-family: Poppins;
 }
 .container{
@@ -112,6 +118,7 @@ body.mostrarCarrito .container{
 }
 .tarjetaCarrito .headerCarrito p{
     cursor: pointer;
+    margin-top: 1.5rem;
 }
 .carritoTotal{
     margin: auto;
@@ -165,6 +172,20 @@ body.mostrarCarrito .container{
 }
 .listaCarrito::-webkit-scrollbar{
     width: 0;
+}
+
+footer{
+    width: 100%;
+    margin-top: 3rem;
+    padding: 2rem;
+    bottom: 0;
+    border-top: 2px solid black;
+}
+
+footer p{
+    font-size: 2rem;
+    text-align: end;
+    padding-right: 2rem;
 }
 
 @media only screen and (max-width: 992px) {

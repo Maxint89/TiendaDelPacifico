@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const comprarCarrito = document.querySelector('.comprar-carrito');
     const btnVaciarCarrito = document.querySelector('.vaciarCarrito');
     let carrito = [];
-
+    let productos = [];
 
     comprarCarrito.addEventListener('click', () => {
         Swal.fire({
@@ -81,32 +81,36 @@ document.addEventListener("DOMContentLoaded", function () {
         let totalGastado = calcularTotalGastado();
         let carritoTotalElement = document.getElementById('carrito-total');
         carritoTotalElement.innerText = `$${totalGastado}`;
-
-        // Guardar el total en localStorage
         localStorage.setItem('totalGastado', totalGastado);
     }
 
     const agregarAlCarrito = (producto_id) => {
-        let productoEnCarrito = carrito.findIndex((value) => value.producto_id == producto_id);
-        if (carrito.length <= 0) {
-            carrito = [{
-                producto_id: producto_id,
-                cantidad: 1
-            }];
-        } else if (productoEnCarrito < 0) {
+        let productoEnCarrito = carrito.find(item => item.producto_id === producto_id);
+        if (productoEnCarrito) {
+            productoEnCarrito.cantidad++;
+        } else {
             carrito.push({
                 producto_id: producto_id,
                 cantidad: 1
             });
-        } else {
-            carrito[productoEnCarrito].cantidad = carrito[productoEnCarrito].cantidad++;
         }
         agregarCarritoAHTML();
         agregarCarritoLS();
+        Toastify({
+            text: "Producto agregado al carrito",
+            duration: 3000,
+            position: "left", 
+            style: {
+                background: "linear-gradient(to right, #0b7018, #10d12a)",
+            },
+            onClick: function () { }
+        }).showToast();
     }
+
     const agregarCarritoLS = () => {
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
+
     const agregarCarritoAHTML = () => {
         listaCarritoHTML.innerHTML = '';
         let cantidadTotal = 0;
@@ -121,13 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 let info = productos[productoUbicacion];
                 listaCarritoHTML.appendChild(itemNuevo);
                 itemNuevo.innerHTML = `
-            <div class="image">
+                <div class="imagen">
                     <img src="${info.imagen}">
                 </div>
-                <div class="name">
-                ${info.nombre}
+                <div class="nombre">
+                    ${info.nombre}
                 </div>
-                <div class="price">$${info.precio}</div>
+                <div class="precio">$${info.precio}</div>
                 <div class="cantidad">
                     <span class="menos"><</span>
                     <span>${item.cantidad}</span>
@@ -151,12 +155,13 @@ document.addEventListener("DOMContentLoaded", function () {
             modificarCarrito(producto_id, botonCantidad);
         }
     })
+
     const modificarCarrito = (producto_id, botonCantidad) => {
         let posicionItemCarrito = carrito.findIndex((value) => value.producto_id == producto_id);
         if (posicionItemCarrito >= 0) {
             switch (botonCantidad) {
                 case 'mas':
-                    carrito[posicionItemCarrito].cantidad = carrito[posicionItemCarrito].cantidad + 1;
+                    carrito[posicionItemCarrito].cantidad++;
                     break;
 
                 default:
@@ -181,9 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
         actualizarTotalCarrito();
     });
 
-
     const iniciarPagina = () => {
-        fetch('productos.json')
+        fetch('./js/productos.json')
             .then(response => response.json())
             .then(data => {
                 productos = data;
