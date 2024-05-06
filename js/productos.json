@@ -3,48 +3,48 @@
         "id": 1,
         "nombre":" Remera 01",
         "precio": 2500,
-        "imagen": "../image/01.jpg"
+        "imagen": "image/01.jpg"
     },
     {
         "id": 2,
         "nombre":" Remera 02",
         "precio": 2500,
-        "imagen": "../image/02.jpg"
+        "imagen": "image/02.jpg"
     },
     {
         "id": 3,
         "nombre":" Remera 03",
         "precio": 2900,
-        "imagen": "../image/03.jpg"
+        "imagen": "image/03.jpg"
     },
     {
         "id": 4,
         "nombre":" Remera 04",
         "precio": 2000,
-        "imagen": "../image/04.jpg"
+        "imagen": "image/04.jpg"
     },
     {
         "id": 5,
         "nombre":" Remera 05",
         "precio": 3000,
-        "imagen": "../image/05.jpg"
+        "imagen": "image/05.jpg"
     },
     {
         "id": 6,
         "nombre":" Remera 06",
         "precio": 2000,
-        "imagen": "../image/06.jpg"
+        "imagen": "image/06.jpg"
     },
     {
         "id": 7,
         "nombre":" Remera 07",
         "precio": 2000,
-        "imagen": "../image/07.jpg"
+        "imagen": "image/07.jpg"
     },
     {
         "id": 8,
         "nombre":" Remera 08",
         "precio": 2000,
-        "imagen": "../image/08.jpg"
+        "imagen": "image/08.jpg"
     }
 ]
